@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TripNest – Book tickets, find your next place</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef3f8;--ink:#0d1b3d;--mut:#55658a;--card:#fff;--line:#cfd9e8;--pink:#ff4d6d;--teal:#00a6a6;--gold:#ffb703;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0a1228;--ink:#eaf0ff;--mut:#97a6cc;--card:#111d3c;--line:#233358}}
+:root[data-theme=dark]{--bg:#0a1228;--ink:#eaf0ff;--mut:#97a6cc;--card:#111d3c;--line:#233358}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*,*:before,*:after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 'DM Sans',system-ui,sans-serif}
+h1,h2,h3{font-family:'Bricolage Grotesque','DM Sans',system-ui,sans-serif;margin:0;line-height:1.05;letter-spacing:-.02em}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px 5vw;background:#0d1b3dcc;backdrop-filter:blur(12px);color:#fff}
+.logo{font:800 24px 'Bricolage Grotesque',sans-serif;display:flex;gap:8px;align-items:center}.logo b{color:var(--gold)}
+nav a{color:#dbe5ff;text-decoration:none;margin-left:22px;font-weight:500}nav a:hover{color:#fff}
+.btn{background:var(--pink);color:#fff;border:0;border-radius:12px;padding:12px 22px;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px #ff4d6d66}
+.hero{position:relative;overflow:hidden;color:#fff;padding:9vh 5vw 150px;min-height:94vh;background:linear-gradient(#141a55 0%,#7b2d8e 38%,#ff4d6d 72%,#ffb703 100%)}
+.sun{position:absolute;left:50%;bottom:90px;width:240px;height:240px;margin-left:-120px;border-radius:50%;background:#ffe08a;box-shadow:0 0 120px 60px #ffb70388;animation:rise 2.4s cubic-bezier(.2,.8,.2,1) both,glow 5s 2.4s ease-in-out infinite alternate}
+@keyframes rise{from{transform:translateY(220px)}}@keyframes glow{to{box-shadow:0 0 160px 90px #ffb703aa}}
+.cloud{position:absolute;height:34px;width:150px;border-radius:40px;background:#ffffff40;filter:blur(3px);animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(-200px)}to{transform:translateX(110vw)}}
+.plane{position:absolute;top:18%;left:0;font-size:38px;animation:fly 14s linear infinite;filter:drop-shadow(0 6px 6px #0004)}
+@keyframes fly{0%{transform:translate(-80px,60px) rotate(-8deg)}50%{transform:translate(50vw,-20px) rotate(0)}100%{transform:translate(105vw,40px) rotate(8deg)}}
+.mt{position:absolute;left:0;bottom:-2px;width:100%;height:230px}
+.hero .in{position:relative;z-index:2;max-width:1100px;margin:auto}
+.hero h1{font-size:clamp(40px,8vw,92px);max-width:11ch;animation:up 1s .3s both}
+.hero p{max-width:46ch;font-size:19px;color:#fff;opacity:.92;animation:up 1s .5s both}
+@keyframes up{from{opacity:0;transform:translateY(34px)}}
+.search{margin-top:34px;background:var(--card);color:var(--ink);border-radius:20px;padding:18px;box-shadow:0 30px 60px #0006;animation:up 1s .7s both;max-width:980px}
+.tabs{display:flex;gap:6px;margin-bottom:14px}
+.tab{border:0;background:transparent;padding:9px 16px;border-radius:999px;cursor:pointer;font-weight:700;color:var(--mut);transition:.25s}
+.tab[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.fields label{display:block;font-size:13px;color:var(--mut);padding:8px 12px;border:1.5px solid var(--line);border-radius:12px}
+.fields input{display:block;width:100%;border:0;background:transparent;font-weight:700;font-size:17px;padding:2px 0;outline:0}
+.fields label:focus-within{border-color:var(--teal)}
+section{padding:80px 5vw;max-width:1250px;margin:auto}
+h2{font-size:clamp(32px,5vw,54px)}.sub{color:var(--mut);max-width:52ch;margin:10px 0 0}
+#res{display:grid;gap:10px;margin-top:16px}
+.tk{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;border:1.5px dashed var(--line);border-radius:14px;padding:14px 16px;animation:up .6s both}
+.tk .r{display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px}
+.tk .ln{flex:1;min-width:40px;height:2px;background:repeating-linear-gradient(90deg,var(--mut) 0 6px,transparent 6px 12px);position:relative}
+.tk .ln:after{content:'✈';position:absolute;top:-11px;left:0;font-size:16px;animation:go 3s linear infinite}
+@keyframes go{to{left:calc(100% - 16px)}}
+.tk small{display:block;font-weight:400;color:var(--mut);font-size:13px}
+.sk{height:64px;border-radius:14px;background:linear-gradient(90deg,var(--line),transparent,var(--line));background-size:200%;animation:sh 1s linear infinite}@keyframes sh{to{background-position:-200%}}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:8px 18px;cursor:pointer;font-weight:700;transition:.2s}
+.chip[aria-pressed=true]{background:var(--teal);border-color:var(--teal);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+.card{position:relative;overflow:hidden;background:var(--card);border-radius:18px;box-shadow:0 14px 34px #0d1b3d1f;transition:transform .25s;animation:pop .5s both;transform-style:preserve-3d}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(20px)}}
+.card svg{display:block;width:100%;height:180px}
+.card .cut{position:relative;border-top:2px dashed var(--line)}
+.card .cut:before,.card .cut:after{content:'';position:absolute;top:-12px;width:22px;height:22px;border-radius:50%;background:var(--bg)}
+.card .cut:before{left:-11px}.card .cut:after{right:-11px}
+.card .bd{padding:18px 20px 20px}.card h3{font-size:26px}.card .rg{color:var(--mut);font-size:14px}
+.card .pr{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-weight:800;font-size:20px}.card .pr span{font-weight:400;font-size:13px;color:var(--mut)}
+.card .btn{padding:9px 16px}
+.sun2{animation:glow2 4s ease-in-out infinite alternate}@keyframes glow2{to{opacity:.4}}
+.w{animation:wave 5s linear infinite}.w2{animation:wave 8s linear infinite reverse}@keyframes wave{to{transform:translateX(75px)}}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:34px}
+.feat div{padding:24px;border-radius:18px;background:var(--card);border:1.5px solid var(--line)}
+.feat i{font-style:normal;font-size:34px;display:block;margin-bottom:10px}.feat h3{font-size:22px;margin-bottom:6px}.feat p{margin:0;color:var(--mut)}
+.stats{background:var(--ink);color:var(--bg);max-width:none;display:flex;justify-content:space-around;flex-wrap:wrap;gap:24px;text-align:center}
+.stats b{display:block;font:800 clamp(38px,6vw,64px) 'Bricolage Grotesque',sans-serif;color:var(--gold)}
+footer{padding:40px 5vw;text-align:center;color:var(--mut)}
+#m{position:fixed;inset:0;background:#0d1b3dcc;display:none;place-items:center;z-index:50;padding:16px}
+#m.on{display:grid}
+.box{background:var(--card);border-radius:20px;padding:26px;max-width:460px;width:100%;animation:pop .4s both;position:relative}
+.box input{width:100%;padding:12px;border:1.5px solid var(--line);border-radius:10px;margin:10px 0 16px;background:transparent}
+.x{position:absolute;right:14px;top:10px;border:0;background:0;font-size:26px;cursor:pointer}
+.pass{border-radius:16px;overflow:hidden;border:1.5px solid var(--line);animation:drop .8s cubic-bezier(.2,1.2,.3,1) both}
+@keyframes drop{from{transform:translateY(-60px) rotate(-4deg);opacity:0}}
+.pass .t{background:linear-gradient(120deg,var(--pink),var(--gold));color:#fff;padding:16px 18px;font:800 30px 'Bricolage Grotesque',sans-serif;display:flex;justify-content:space-between}
+.pass .b{padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}.pass small{color:var(--mut);display:block}
+.bar{height:46px;margin:0 18px 18px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 5px,var(--ink) 5px 6px,transparent 6px 10px)}
+.cf{position:fixed;top:-20px;width:10px;height:14px;z-index:99;animation:fall 2.4s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media(max-width:700px){nav a{display:none}.hero{padding-bottom:120px}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+</style></head><body>
+<nav><div class="logo">🧭 Trip<b>Nest</b></div><div><a href="#book">Tickets</a><a href="#places">Places</a><a href="#why">Why TripNest</a><a class="btn" href="#book" style="padding:9px 18px;margin-left:22px;color:#fff">Book now</a></div></nav>
+
+<header class="hero" id="book">
+<div class="sun"></div>
+<div class="cloud" style="top:12%;animation-duration:38s"></div><div class="cloud" style="top:30%;width:100px;animation-duration:52s;animation-delay:-20s"></div><div class="cloud" style="top:52%;animation-duration:44s;animation-delay:-8s"></div>
+<div class="plane">✈️</div>
+<svg class="mt" viewBox="0 0 1440 230" preserveAspectRatio="none"><path d="M0 230V110l180-80 170 90 200-100 220 120 190-90 250 100 230-70v150z" fill="#3a1d6e" opacity=".75"/><path d="M0 230V160l140-50 160 60 220-80 200 90 240-70 180 60 300-50v110z" fill="#120f3a"/></svg>
+<div class="in">
+<h1>Your next ticket is one tap away.</h1>
+<p>Flights, trains and buses to the mountains, beaches and palaces you've been saving on your wishlist.</p>
+<div class="search">
+<div class="tabs" id="tabs"><button class="tab" aria-pressed="true" data-m="Flight">✈️ Flights</button><button class="tab" aria-pressed="false" data-m="Train">🚆 Trains</button><button class="tab" aria-pressed="false" data-m="Bus">🚌 Buses</button></div>
+<div class="fields">
+<label>From<input id="from" value="Delhi" list="c"></label>
+<label>To<input id="to" placeholder="Where to?" list="c"></label>
+<label>Date<input id="date" type="date"></label>
+<label>Travellers<input id="pax" type="number" min="1" max="9" value="1"></label>
+<button class="btn" id="go">Search tickets</button></div>
+<datalist id="c"><option>Delhi<option>Mumbai<option>Bengaluru<option>Kolkata<option>Manali<option>Goa<option>Jaipur<option>Kerala<option>Ladakh<option>Udaipur<option>Bali<option>Maldives</datalist>
+<div id="res" aria-live="polite"></div>
+</div></div></header>
+
+<section id="places">
+<h2>Places worth the ticket</h2>
+<p class="sub">Eight handpicked escapes. Pick one and we'll fill in your search.</p>
+<div class="chips" id="chips"><button class="chip" aria-pressed="true" data-c="all">All</button><button class="chip" aria-pressed="false" data-c="mountain">Mountains</button><button class="chip" aria-pressed="false" data-c="beach">Beaches</button><button class="chip" aria-pressed="false" data-c="heritage">Heritage</button></div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section id="why"><h2>Travel that feels light</h2>
+<div class="feat"><div><i>⚡</i><h3>Book in 3 taps</h3><p>Search, pick, confirm. Your boarding pass appears instantly.</p></div><div><i>💸</i><h3>Honest prices</h3><p>What you see is what you pay. No surprise fees at checkout.</p></div><div><i>🔁</i><h3>Free changes</h3><p>Plans moved? Reschedule up to 24 hours before departure.</p></div><div><i>🛟</i><h3>Help any time</h3><p>Real people on chat, day and night, in English and Hindi.</p></div></div></section>
+
+<section class="stats"><div><b data-n="2400000">0</b>happy travellers</div><div><b data-n="850">0</b>destinations</div><div><b data-n="4.8">0</b>average rating</div></section>
+<footer>🧭 TripNest · Made for wanderers · © 2026 TripNest demo project</footer>
+
+<div id="m" role="dialog" aria-modal="true"><div class="box"><button class="x" aria-label="Close" onclick="cl()">×</button><div id="mb"></div></div></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const D=[['Manali','Himachal, India','mountain',4999,4.8,'#4f6bed','#bfeaff'],['Goa','Beach state, India','beach',3999,4.7,'#ff8a5b','#ffd36e'],['Jaipur','Rajasthan, India','heritage',3499,4.6,'#d6456b','#ffc27a'],['Kerala','Backwaters, India','beach',5499,4.9,'#12a37f','#c4f5d2'],['Ladakh','Himalaya, India','mountain',8999,4.9,'#6a4cc4','#f7bdf0'],['Udaipur','Lake city, India','heritage',4299,4.7,'#d9822b','#ffe9a8'],['Bali','Indonesia','beach',21999,4.8,'#0fa3b1','#fdf0a8'],['Maldives','Indian Ocean','beach',34999,4.9,'#1e88e5','#a6f5ee']];
+const S={mountain:'<path d="M0 200V125l65-70 55 55 45-38 135 90v38z" fill="#fff" opacity=".4"/><path d="M0 200V150l60-48 50 38 60-60 130 100v20z" fill="#10233a" opacity=".6"/><path d="M60 102l-13 12 13-4 13 4z" fill="#fff"/><path d="M170 80l-16 14 16-5 16 5z" fill="#fff"/>',
+beach:'<path d="M70 200q4-60 12-92" stroke="#4a3320" stroke-width="6" fill="none"/><path d="M82 108q-34-24-58 2q30-8 58-2zM82 108q34-28 62-6q-32-4-62 6z" fill="#0b6b4a"/><g class="w"><path d="M-100 150q37-14 75 0t75 0 75 0 75 0 75 0 75 0v60h-450z" fill="#fff" opacity=".45"/></g><g class="w2"><path d="M-100 172q37-14 75 0t75 0 75 0 75 0 75 0 75 0v40h-450z" fill="#0b4f6c" opacity=".55"/></g>',
+heritage:'<rect x="85" y="112" width="130" height="90" fill="#6d1f35" opacity=".85"/><path d="M105 112q45-78 90 0z" fill="#6d1f35"/><rect x="146" y="52" width="8" height="22" fill="#6d1f35"/><path d="M120 200v-34q10-16 20 0v34zM160 200v-34q10-16 20 0v34z" fill="#ffe8c2"/><rect x="62" y="100" width="12" height="102" fill="#6d1f35"/><rect x="226" y="100" width="12" height="102" fill="#6d1f35"/>'};
+const scene=(d,i)=>`<svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${d[5]}"/><stop offset="1" stop-color="${d[6]}"/></linearGradient></defs><rect width="300" height="200" fill="url(#g${i})"/><circle class="sun2" cx="228" cy="52" r="24" fill="#fff" opacity=".85"/>${S[d[2]]}</svg>`;
+let cat='all',mode='Flight';
+function draw(){$('#grid').innerHTML=D.map((d,i)=>[d,i]).filter(([d])=>cat=='all'||d[2]==cat).map(([d,i],k)=>`<article class="card" style="animation-delay:${k*70}ms">${scene(d,i)}<div class="cut"></div><div class="bd"><h3>${d[0]}</h3><div class="rg">${d[1]} · ★ ${d[4]}</div><div class="pr"><div><span>from</span><br>₹${d[3].toLocaleString('en-IN')}</div><button class="btn" data-t="${d[0]}">Book trip</button></div></div></article>`).join('')}
+draw();
+$('#chips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;cat=b.dataset.c;$$('.chip').forEach(c=>c.setAttribute('aria-pressed',c==b));draw()};
+$('#grid').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;$('#to').value=b.dataset.t;$('#book').scrollIntoView();setTimeout(search,500)};
+$('#grid').onmousemove=e=>{const c=e.target.closest('.card');$$('.card').forEach(x=>x.style.transform='');if(!c)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-6px)`};
+$('#grid').onmouseleave=()=>$$('.card').forEach(x=>x.style.transform='');
+$('#tabs').onclick=e=>{const b=e.target.closest('.tab');if(!b)return;mode=b.dataset.m;$$('.tab').forEach(t=>t.setAttribute('aria-pressed',t==b))};
+$('#date').value=new Date(Date.now()+6048e5).toISOString().slice(0,10);
+const cfg={Flight:{n:['NestJet','SkyNest','CloudAir'],p:3200,d:['2h 10m','2h 25m','2h 05m']},Train:{n:['Nest Rajdhani','Nest Superfast','Nest Premium'],p:1100,d:['12h 40m','15h 10m','11h 55m']},Bus:{n:['Nest Volvo AC','Night Sleeper','Hill Express'],p:800,d:['14h 30m','16h 00m','13h 45m']}};
+const T=['06:15','11:40','19:25'];
+function search(){const f=$('#from').value||'Delhi',t=$('#to').value;if(!t){$('#to').focus();return}$('#res').innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div>';
+setTimeout(()=>{const c=cfg[mode],px=+$('#pax').value||1;$('#res').innerHTML=c.n.map((n,i)=>{const pr=(c.p+i*380+t.length*90)*px;return`<div class="tk" style="animation-delay:${i*120}ms"><div><div class="r">${T[i]}<span class="ln"></span>${c.d[i]}</div><small>${n} · ${f} to ${t} · ${px} traveller${px>1?'s':''}</small></div><div style="text-align:right"><b style="font-size:22px">₹${pr.toLocaleString('en-IN')}</b><br><button class="btn" data-b="${i}|${pr}" style="padding:8px 16px;margin-top:4px">Book</button></div></div>`}).join('')},900)}
+$('#go').onclick=search;
+$('#res').onclick=e=>{const b=e.target.closest('[data-b]');if(!b)return;const[i,pr]=b.dataset.b.split('|');open_(+i,+pr)};
+let cur;
+function open_(i,pr){cur={i,pr,f:$('#from').value||'Delhi',t:$('#to').value,d:$('#date').value,n:cfg[mode].n[i],m:mode};$('#mb').innerHTML=`<h3 style="font-size:28px">Almost there</h3><p class="sub">${cur.n}, ${cur.f} to ${cur.t}, ₹${pr.toLocaleString('en-IN')}</p><label for="nm">Passenger name</label><input id="nm" placeholder="As on your ID" autofocus><button class="btn" style="width:100%" onclick="pay()">Pay and get ticket</button>`;$('#m').classList.add('on')}
+function pay(){const n=$('#nm').value.trim();if(!n){$('#nm').focus();$('#nm').style.borderColor='var(--pink)';return}
+const code=s=>s.slice(0,3).toUpperCase(),seat=(1+Math.random()*28|0)+'ABCDEF'[Math.random()*6|0],pnr=Math.random().toString(36).slice(2,8).toUpperCase();
+$('#mb').innerHTML=`<h3 style="font-size:26px;margin-bottom:14px">Booked, ${n.split(' ')[0]}! 🎉</h3><div class="pass"><div class="t"><span>${code(cur.f)}</span><span>${cur.m=='Flight'?'✈️':cur.m=='Train'?'🚆':'🚌'}</span><span>${code(cur.t)}</span></div><div class="b"><div><small>Passenger</small><b>${n}</b></div><div><small>Date</small><b>${cur.d}</b></div><div><small>${cur.n}</small><b>${T[cur.i]}</b></div><div><small>Seat · PNR</small><b>${seat} · ${pnr}</b></div></div><div class="bar"></div></div><button class="btn" style="width:100%;margin-top:16px" onclick="cl()">Done</button>`;boom()}
+function cl(){$('#m').classList.remove('on')}
+document.onkeydown=e=>{if(e.key=='Escape')cl()};
+function boom(){for(let i=0;i<44;i++){const c=document.createElement('i');c.className='cf';c.style.cssText=`left:${Math.random()*100}vw;background:${['#ff4d6d','#ffb703','#00a6a6','#4f6bed'][i%4]};animation-delay:${Math.random()*.6}s;border-radius:${i%2?'50%':'2px'}`;document.body.appendChild(c);setTimeout(()=>c.remove(),3200)}}
+try{const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,n=+el.dataset.n,t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/1600),v=n*(1-Math.pow(1-k,3));el.textContent=n<10?v.toFixed(1):n>999999?(v/1e6).toFixed(1)+'M+':Math.round(v)+'+';if(k<1)requestAnimationFrame(f)})(t0);io.unobserve(el)}));$$('[data-n]').forEach(x=>io.observe(x))}catch(e){$$('[data-n]').forEach(x=>x.textContent=x.dataset.n)}
+</script></body></html>
