@@ -19,3 +19,4 @@ Open `index.html` in any browser. No build step, no dependencies.
 
 ## Tech
 HTML, CSS and vanilla JavaScript in a single file.
+Testing a GitHub achievement.
