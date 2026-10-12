@@ -1,4 +1,7 @@
 "use strict";
+document.documentElement.classList.add("js-motion");
+const revealObserver="IntersectionObserver" in window?new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");revealObserver.unobserve(entry.target)}}),{threshold:.14,rootMargin:"0px 0px -35px 0px"}):null;
+function observeReveals(root=document){if(!revealObserver)return;root.querySelectorAll(".reveal").forEach(element=>revealObserver.observe(element))}
 const destinations = [
   {name:"Manali", region:"Himachal Pradesh, India", kind:"mountain", label:"Mountain escape", price:4999, image:"assets/manali.jpg", alt:"Snowy Himalayan ridges above a quiet mountain trail", description:"Pine-scented trails, snowy peaks and slow mornings."},
   {name:"Goa", region:"India's west coast", kind:"beach", label:"Coastal favourite", price:3999, image:"assets/goa.jpg", alt:"Palm-lined Goan beach beside clear turquoise water", description:"Salt air, palm shade and nowhere urgent to be."},
@@ -34,15 +37,16 @@ function renderDestinations(){
     const matchesSaved=!state.savedOnly||state.saved.has(place.name);
     return matchesCategory&&matchesQuery&&matchesSaved;
   });
-  grid.innerHTML=shown.map(place=>{
+  grid.innerHTML=shown.map((place,index)=>{
     const saved=state.saved.has(place.name);
-    return '<article class="destination-card">'+
+    return '<article class="destination-card reveal" style="--reveal-delay:'+Math.min(index,5)*70+'ms">'+
       '<div class="destination-photo"><img src="'+place.image+'" alt="'+escapeHTML(place.alt)+'" loading="lazy" decoding="async" width="1100" height="735" onerror="this.style.visibility=\'hidden\'"><span class="photo-tag">'+escapeHTML(place.label)+'</span>'+
       '<button class="save-button" type="button" data-save="'+escapeHTML(place.name)+'" aria-label="'+(saved?"Remove "+escapeHTML(place.name)+" from":"Save "+escapeHTML(place.name)+" to")+' saved places" aria-pressed="'+saved+'">'+(saved?"♥":"♡")+'</button></div>'+
       '<div class="destination-info"><p class="destination-location"><span aria-hidden="true">⌖</span>'+escapeHTML(place.region)+'</p><h3>'+escapeHTML(place.name)+'</h3>'+
       '<p class="destination-description">'+escapeHTML(place.description)+'</p><div class="destination-bottom"><div><span class="fare-label">Sample fare from</span><span class="fare-price">'+formatMoney(place.price)+'</span></div>'+
       '<button class="plan-button" type="button" data-plan="'+escapeHTML(place.name)+'">Plan this trip <span aria-hidden="true">↗</span></button></div></div></article>';
   }).join("");
+  observeReveals(grid);
   emptyState.hidden=shown.length>0;
   $("#saved-count").textContent=String(state.saved.size);
 }
@@ -186,4 +190,6 @@ navLinks.addEventListener("click",event=>{
   if(event.target.closest("a")){menuButton.setAttribute("aria-expanded","false");menuButton.setAttribute("aria-label","Open menu");navLinks.classList.remove("is-open")}
 });
 renderDestinations();
+document.querySelectorAll(".search-panel,.results,.how-intro,.step,.site-footer").forEach(element=>element.classList.add("reveal"));
+observeReveals();
 
