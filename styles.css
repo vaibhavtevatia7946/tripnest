@@ -182,3 +182,6 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(-
 @media(max-width:620px){.travel-routes{left:18px;bottom:125px;width:calc(100% - 36px)}}
 .travel-routes{left:auto;right:clamp(20px,calc((100% - 1172px)/2),100px);width:min(430px,48%)}
 @media(max-width:620px){.travel-routes{left:18px;right:auto;width:calc(100% - 36px)}}
+
+.search-section{margin-top:0;padding-top:46px}
+@media(max-width:620px){.search-section{margin-top:0;padding-top:38px}}
