@@ -2,6 +2,9 @@
 
 A travel and ticket-booking website with an animated sunset hero, sample flight/train/bus search, a boarding-pass booking flow, and eight destination cards.
 
+## Demo note
+TripNest is a front-end demo. Search results and booking details are generated in the browser; it has no sign-in, backend booking, payment processing, or real ticket issuance.
+
 ## Features
 - Animated hero: rising sun, drifting clouds, flying plane, mountain layers
 - Ticket search for Flights, Trains and Buses (sample data, no real bookings)
@@ -19,4 +22,3 @@ Open `index.html` in any browser. No build step, no dependencies.
 
 ## Tech
 HTML, CSS and vanilla JavaScript in a single file.
-Testing a GitHub achievement.
