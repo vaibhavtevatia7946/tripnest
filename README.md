@@ -9,6 +9,7 @@ TripNest is a polished, responsive travel-booking interface concept. It lets vis
 - Destination photography stored locally in \`assets/\`, with descriptive alt text and lazy loading
 - Searchable destination cards with category filters and browser-local saved places
 - Responsive travel search for flights, trains and buses
+- A moving hero scene with animated flight, train and bus routes
 - Sample departure cards and a demo boarding-pass flow
 - Accessible labels, keyboard focus styles, reduced-motion support, and light/dark system themes
 - No framework, package manager, or build step required
