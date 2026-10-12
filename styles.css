@@ -178,3 +178,5 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(-
 @media(max-width:390px){.destination-grid{grid-template-columns:1fr}.destination-photo{height:235px}.destination-description{min-height:0}.hero-note{margin-top:24px}.hero-inner{padding-top:60px}.hero h1{font-size:44px}.field-small input{max-width:100%}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
+.travel-routes{left:clamp(20px,calc((100% - 1172px)/2),100px);bottom:150px;width:min(430px,calc(100% - 68px));z-index:8;background:rgba(35,29,91,.5)}
+@media(max-width:620px){.travel-routes{left:18px;bottom:125px;width:calc(100% - 36px)}}
