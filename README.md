@@ -4,6 +4,11 @@ TripNest is a polished, responsive travel-booking interface concept. It lets vis
 
 > **Demo only:** schedules, prices and passes are illustrative. The site does not connect to travel inventory, process payments, create accounts, or issue valid tickets.
 
+## Live site
+
+- [Open the Vercel demo](https://tripnest-redesign.vercel.app/)
+- [Open the GitHub Pages demo](https://vaibhavtevatia7946.github.io/tripnest/)
+
 ## Features
 
 - Destination photography stored locally in \`assets/\`, with descriptive alt text and lazy loading
@@ -35,4 +40,3 @@ Destination photos are from [Unsplash](https://unsplash.com), included in the re
 ## Tech
 
 HTML, CSS and vanilla JavaScript.
-
