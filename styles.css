@@ -352,13 +352,15 @@ body{background:var(--soft);color:var(--ink)}
 @media(prefers-reduced-motion:reduce){.hero-orb,.landscape-sun,.route-vehicle{animation:none!important}}
 @keyframes tripnest-drop{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes tripnest-backdrop{from{transform:scale(1.07);filter:brightness(.78)}to{transform:scale(1);filter:brightness(1)}}
+@keyframes hero-highlight-arrive{from{opacity:0;transform:translateY(18px) scale(.92);filter:blur(6px);text-shadow:0 0 28px rgba(255,224,162,.9)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0);text-shadow:none}}
 .site-header{animation:tripnest-drop .7s cubic-bezier(.2,.7,.2,1) both}
 .hero-backdrop{transform-origin:center;animation:tripnest-backdrop 1.5s cubic-bezier(.2,.7,.2,1) both}
 .hero-copy{animation:rise-in .82s .12s cubic-bezier(.2,.7,.2,1) both}
+.hero h1 em{display:inline-block;animation:hero-highlight-arrive .9s .38s cubic-bezier(.2,.7,.2,1) both}
 .hero-note{animation:rise-in .75s .34s cubic-bezier(.2,.7,.2,1) both}
 .search-panel{animation:rise-in .78s .3s cubic-bezier(.2,.7,.2,1) both}
 .featured-destination{animation:rise-in .72s .5s cubic-bezier(.2,.7,.2,1) both}
 .hero-benefits>div{animation:rise-in .7s .56s cubic-bezier(.2,.7,.2,1) both}
 .hero-benefits>div:nth-child(2){animation-delay:.68s}
 .hero-benefits>div:nth-child(3){animation-delay:.8s}
-@media(prefers-reduced-motion:reduce){.site-header,.hero-backdrop,.hero-copy,.hero-note,.search-panel,.featured-destination,.hero-benefits>div{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.site-header,.hero-backdrop,.hero-copy,.hero h1 em,.hero-note,.search-panel,.featured-destination,.hero-benefits>div{animation:none!important}}
