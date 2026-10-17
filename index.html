@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f5f7fb">
+  <meta name="theme-color" content="#082b58">
   <meta name="description" content="Find your next escape with TripNest. Explore handpicked places and preview sample flight, train and bus fares.">
   <meta property="og:title" content="TripNest — find your next escape">
   <meta property="og:description" content="Explore handpicked destinations and preview sample trip fares.">
@@ -11,8 +11,8 @@
   <title>TripNest — find your next escape</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261013-spacing">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=sunset-reference">
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -22,72 +22,66 @@
       <a class="brand" href="#top" aria-label="TripNest home"><span class="brand-mark" aria-hidden="true">✦</span><span>trip<span class="brand-accent">nest</span></span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><span></span><span></span></button>
       <div class="nav-links" id="nav-links">
-        <a href="#destinations">Destinations</a>
-        <a href="#how-it-works">How it works</a>
-        <a class="nav-cta" href="#search">Plan a trip <span aria-hidden="true">↗</span></a>
+        <a class="is-current" href="#top">Home</a>
+        <a href="#search" data-nav-mode="Flight">Flights</a>
+        <a href="#search" data-nav-mode="Train">Trains</a>
+        <a href="#search" data-nav-mode="Bus">Buses</a>
+        <a href="#destinations">Hotels</a>
+        <a href="#how-it-works">About</a>
       </div>
+      <a class="nav-cta" href="#search">Plan a trip <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
-      <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+      <div class="hero-backdrop" aria-hidden="true"></div>
       <div class="hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="eyebrow-dot"></span> A little closer to somewhere beautiful</p>
-          <h1 id="hero-title">The world feels<br><em>closer from here.</em></h1>
-          <p class="hero-description">Pick a place that stays with you. We'll help you imagine the journey.</p>
-          <a class="text-link" href="#destinations">Find your next escape <span aria-hidden="true">↓</span></a>
+          <p class="hero-script">Explore <span aria-hidden="true">✈</span> Discover <span aria-hidden="true">✈</span> Book</p>
+          <h1 id="hero-title">The world feels<br><em>closer</em> from here.</h1>
+          <p class="hero-description">Flights, trains, buses and places to stay — all in one place.<br>Your next adventure is just a few clicks away.</p>
         </div>
-        <aside class="hero-note" aria-label="TripNest demo note">
-          <span class="note-icon" aria-hidden="true">✧</span>
-          <div><strong>Made for daydreaming.</strong><p>Explore sample fares and create a pretend boarding pass.</p></div>
+        <p class="hero-note">Collect<br>Moments<br><span>Not Things</span></p>
+        <aside class="featured-destination" aria-label="Featured destination">
+          <img src="assets/udaipur.jpg" alt="" width="72" height="72">
+          <div><span>✦ Featured escape</span><strong>Udaipur, India</strong><small>Sample fares from ₹4,299</small></div>
+          <a href="#destinations" aria-label="Explore destinations">→</a>
         </aside>
       </div>
-      <div class="hero-landscape" aria-hidden="true">
-        <div class="landscape-sun"></div>
-        <div class="landscape-hill hill-back"></div>
-        <div class="landscape-hill hill-front"></div>
+      <section class="search-section" id="search" aria-label="Plan your journey">
+        <form class="search-panel" id="search-form">
+          <div class="transport-tabs" role="group" aria-label="Choose transport">
+            <button class="transport-tab is-active" type="button" data-mode="Flight" aria-pressed="true"><span aria-hidden="true">✈</span> Flights</button>
+            <button class="transport-tab" type="button" data-mode="Train" aria-pressed="false"><span aria-hidden="true">▰</span> Trains</button>
+            <button class="transport-tab" type="button" data-mode="Bus" aria-pressed="false"><span aria-hidden="true">▣</span> Buses</button>
+          </div>
+          <div class="search-fields">
+            <label class="field"><span>From</span><input id="from" name="from" value="Delhi" list="places-list" autocomplete="off" required></label>
+            <label class="field"><span>To</span><input id="to" name="to" placeholder="Select destination" list="places-list" autocomplete="off" required></label>
+            <label class="field"><span>Depart</span><input id="date" name="date" type="date" required></label>
+            <label class="field field-small"><span>Passengers</span><input id="pax" name="pax" type="number" min="1" max="9" value="1" inputmode="numeric" required></label>
+            <button class="button button-primary search-button" type="submit"><span>Search</span><span aria-hidden="true">⌕</span></button>
+          </div>
+          <datalist id="places-list">
+            <option>Delhi</option><option>Mumbai</option><option>Bengaluru</option><option>Kolkata</option>
+            <option>Manali</option><option>Goa</option><option>Jaipur</option><option>Kerala</option>
+            <option>Ladakh</option><option>Udaipur</option><option>Bali</option><option>Maldives</option>
+          </datalist>
+          <p class="search-disclaimer">Demo only · sample schedules and fares, no real bookings.</p>
+        </form>
+        <div class="results" id="results" aria-live="polite" aria-busy="false"></div>
+      </section>
+      <div class="hero-benefits" aria-label="TripNest features">
+        <div><span>✈</span><p><strong>Find your route</strong><small>Flights, trains & buses</small></p></div>
+        <div><span>♡</span><p><strong>Save your places</strong><small>Kept on this device</small></p></div>
+        <div><span>✦</span><p><strong>Made for daydreaming</strong><small>Explore at your own pace</small></p></div>
       </div>
-      <div class="travel-routes" aria-hidden="true">
-        <div class="route-lane route-flight"><span class="route-label">FLIGHT</span><span class="route-track"><span class="route-vehicle">✈</span></span></div>
-        <div class="route-lane route-train"><span class="route-label">TRAIN</span><span class="route-track"><span class="route-vehicle">🚆</span></span></div>
-        <div class="route-lane route-bus"><span class="route-label">BUS</span><span class="route-track"><span class="route-vehicle">🚌</span></span></div>
-      </div>
-    </section>
-
-    <section class="search-section" id="search" aria-labelledby="search-title">
-      <div class="search-heading">
-        <div><p class="eyebrow eyebrow-dark">START WITH THE JOURNEY</p><h2 id="search-title">Where to next?</h2></div>
-        <p class="sample-label"><span aria-hidden="true">✦</span> Sample fares · demo only</p>
-      </div>
-      <form class="search-panel" id="search-form">
-        <div class="transport-tabs" role="group" aria-label="Choose transport">
-          <button class="transport-tab is-active" type="button" data-mode="Flight" aria-pressed="true"><span aria-hidden="true">✈</span> Flights</button>
-          <button class="transport-tab" type="button" data-mode="Train" aria-pressed="false"><span aria-hidden="true">▰</span> Trains</button>
-          <button class="transport-tab" type="button" data-mode="Bus" aria-pressed="false"><span aria-hidden="true">▣</span> Buses</button>
-        </div>
-        <div class="search-fields">
-          <label class="field"><span>Leaving from</span><input id="from" name="from" value="Delhi" list="places-list" autocomplete="off" required></label>
-          <label class="field"><span>Going to</span><input id="to" name="to" placeholder="Choose a destination" list="places-list" autocomplete="off" required></label>
-          <label class="field"><span>Travel date</span><input id="date" name="date" type="date" required></label>
-          <label class="field field-small"><span>Travellers</span><input id="pax" name="pax" type="number" min="1" max="9" value="1" inputmode="numeric" required></label>
-          <button class="button button-primary search-button" type="submit"><span>Explore fares</span><span aria-hidden="true">↗</span></button>
-        </div>
-        <datalist id="places-list">
-          <option>Delhi</option><option>Mumbai</option><option>Bengaluru</option><option>Kolkata</option>
-          <option>Manali</option><option>Goa</option><option>Jaipur</option><option>Kerala</option>
-          <option>Ladakh</option><option>Udaipur</option><option>Bali</option><option>Maldives</option>
-        </datalist>
-        <p class="search-disclaimer">This demo uses made-up schedules and prices. It cannot book or issue real tickets.</p>
-      </form>
-      <div class="results" id="results" aria-live="polite" aria-busy="false"></div>
     </section>
 
     <section class="destinations-section" id="destinations" aria-labelledby="destinations-title">
       <div class="section-heading">
-        <div><p class="eyebrow eyebrow-dark">A FEW PLACES TO BEGIN</p><h2 id="destinations-title">Find your kind of away.</h2><p class="section-description">From mountain mornings to slow afternoons by the sea.</p></div>
+        <div><p class="eyebrow eyebrow-dark">EXPLORE TOP DESTINATIONS</p><h2 id="destinations-title">Popular Destinations<br>for <span>Your Next Trip</span></h2><p class="section-description">From breathtaking mountains to serene beaches, discover the most loved places around the world.</p></div>
         <div class="destination-tools">
           <label class="destination-search"><span class="sr-only">Search destinations</span><span aria-hidden="true">⌕</span><input id="destination-search" type="search" placeholder="Search places" autocomplete="off"></label>
           <button class="filter-button" id="saved-filter" type="button" aria-pressed="false">♡ Saved <span id="saved-count">0</span></button>
@@ -102,6 +96,12 @@
       <div class="destination-grid" id="destination-grid"></div>
       <p class="empty-state" id="empty-state" hidden>No places match that search yet. Try another name or filter.</p>
       <div class="photo-credit">Destination photography from <a href="https://unsplash.com" target="_blank" rel="noreferrer">Unsplash</a>.</div>
+    </section>
+    <section class="stats-strip" aria-label="TripNest demo at a glance">
+      <div><span aria-hidden="true">✈</span><strong>8</strong><small>Handpicked places</small></div>
+      <div><span aria-hidden="true">★</span><strong>3</strong><small>Ways to travel</small></div>
+      <div><span aria-hidden="true">♡</span><strong>Local</strong><small>Saved on your device</small></div>
+      <div><span aria-hidden="true">✦</span><strong>Demo</strong><small>No real bookings</small></div>
     </section>
 
     <section class="how-section" id="how-it-works" aria-labelledby="how-title">
