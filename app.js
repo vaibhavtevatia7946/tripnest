@@ -101,6 +101,9 @@ $("#search-form").addEventListener("click",event=>{
     button.classList.toggle("is-active",active);
     button.setAttribute("aria-pressed",String(active));
   });
+  $$("#nav-links a").forEach(link=>{
+    link.classList.toggle("is-current",link.dataset.navMode===state.mode);
+  });
 });
 function localDate(date){
   return [date.getFullYear(),String(date.getMonth()+1).padStart(2,"0"),String(date.getDate()).padStart(2,"0")].join("-");
@@ -187,9 +190,15 @@ menuButton.addEventListener("click",()=>{
   navLinks.classList.toggle("is-open",open);
 });
 navLinks.addEventListener("click",event=>{
-  if(event.target.closest("a")){menuButton.setAttribute("aria-expanded","false");menuButton.setAttribute("aria-label","Open menu");navLinks.classList.remove("is-open")}
+  const link=event.target.closest("a");
+  if(!link)return;
+  const modeLink=link.dataset.navMode;
+  if(modeLink){$$(".transport-tab").find(tab=>tab.dataset.mode===modeLink)?.click()}
+  else{$$("#nav-links a").forEach(item=>item.classList.toggle("is-current",item===link))}
+  menuButton.setAttribute("aria-expanded","false");
+  menuButton.setAttribute("aria-label","Open menu");
+  navLinks.classList.remove("is-open");
 });
 renderDestinations();
 document.querySelectorAll(".search-panel,.results,.how-intro,.step,.site-footer").forEach(element=>element.classList.add("reveal"));
 observeReveals();
-
