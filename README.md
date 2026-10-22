@@ -53,5 +53,3 @@
 - **Sub-50ms First Contentful Paint (FCP):** Instant render with zero virtual DOM diffing or script hydration penalty.
 - **Design Tokens Architecture:** Centralized CSS Custom Properties (variables) managing color palettes, typography scales, elevation shadows, and border radii.
 - **Accessible by Default:** Structured semantic landmarks, distinct `:focus-visible` keyboard outlines, and native `prefers-reduced-motion` compliance.
-
-- 
