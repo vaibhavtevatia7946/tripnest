@@ -1,4 +1,4 @@
-kk<div align="center">
+<div align="center">
 
 # ✦ TripNest ✦
 ### `~/ travel-booking-interface`
