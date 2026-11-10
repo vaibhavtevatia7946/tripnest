@@ -1,5 +1,5 @@
 <div align="center">
-hu
+
 # ✦ TripNest ✦
 ### `~/ travel-booking-interface`
 
