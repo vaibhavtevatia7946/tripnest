@@ -1,4 +1,4 @@
-"use strict";
+"use strict";va
 document.documentElement.classList.add("js-motion");
 const revealObserver="IntersectionObserver" in window?new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");revealObserver.unobserve(entry.target)}}),{threshold:.14,rootMargin:"0px 0px -35px 0px"}):null;
 function observeReveals(root=document){if(!revealObserver)return;root.querySelectorAll(".reveal").forEach(element=>revealObserver.observe(element))}
